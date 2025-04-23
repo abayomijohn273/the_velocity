@@ -1,7 +1,9 @@
 'use client';
 
 import Button from '@/components/ui/button';
+import Image from 'next/image';
 import Link from 'next/link';
+import Logo from '../../../../public/assets/images/webp/logo.webp';
 
 const Header = () => {
   const handleClick = (section: string) => {
@@ -14,11 +16,12 @@ const Header = () => {
     <header className="relative pt-6 md:pt-8 px-4 md:px-0">
       <nav
         className="flex justify-between items-center max-w-7xl mx-auto 
-      bg-[#FBFFE7] shadow-[0px_4px_50px_0px_rgba(0,0,0,0.1)] py-3 md:py-3.5 pr-4 md:pr-5 pl-6 lg:pr-[22px] lg:pl-[70px] rounded-full"
+      bg-[#FBFFE7] shadow-[0px_4px_50px_0px_rgba(0,0,0,0.1)] py-3 md:py-3.5 pr-4 md:pr-5 pl-6 lg:pr-[22px] lg:pl-[40px] rounded-full"
       >
         <div className="w-2/12">
           <Link href="/" className="text-xl md:text-2xl lg:text-[1.75rem] font-bold text-primary">
-            Velocity
+            <Image src={Logo} alt="Logo" className="w-32 lg:w-36" />
+            <span className="sr-only">Velocity</span>
           </Link>
         </div>
 

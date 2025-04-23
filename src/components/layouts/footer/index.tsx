@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import FooterImage from '../../../../public/assets/images/webp/footer-image.webp';
+import Logo from '../../../../public/assets/images/webp/logo.webp';
 import { InstagramIcon, LinkedInIcon } from './FooterIcons';
 import SocialLink from './SocialLink';
 import CtaSection from './ctaSection';
@@ -14,7 +15,15 @@ const Footer = () => {
           <div className="flex flex-col lg:flex-row">
             <div className="w-full md:w-6/12 lg:w-5/12 xl:w-6/12">
               <div>
-                <h3 className="text-3xl font-bold text-primary mb-4">The Velocity</h3>
+                <div className="mb-4">
+                  <Link
+                    href="/"
+                    className="text-xl md:text-2xl lg:text-[1.75rem] font-bold text-primary"
+                  >
+                    <Image src={Logo} alt="Logo" className="w-40" />
+                    <span className="sr-only">Velocity</span>
+                  </Link>
+                </div>
                 <p className="text-base mb-6 text-black">
                   This is where Africa’s fast-rising stars connect, collaborate, and create the
                   future—together.

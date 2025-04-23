@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'Velocity',
+  title: 'The Velocity',
   description: 'Rising Stars Collaborating and Moving Together to Achieve Big Things',
 };
 
