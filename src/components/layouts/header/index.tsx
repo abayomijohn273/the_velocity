@@ -59,11 +59,7 @@ const Header = () => {
               BE A SPONSOR
             </Link> */}
 
-            <Button
-              href="https://forms.zohopublic.com/utiva/form/EyitayoVentureLabandStudio/formperma/XHzFLKsz87gdWAIlyAmvoHdME8sXaQ0hT56Alaj9tZ0"
-              title="GET STARTED"
-              target="_blank"
-            />
+            <Button href="/join-us" title="GET STARTED" />
           </div>
         </div>
       </nav>

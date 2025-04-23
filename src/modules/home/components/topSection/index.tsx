@@ -12,7 +12,7 @@ const TopSection = () => {
       {/* Hero Section */}
       <div className="px-4 md:px-8 pt-20 pb-16 lg:pb-24 xl:pb-28 max-w-7xl mx-auto">
         <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl lg:leading-tight text-white font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl lg:leading-tight text-white font-bold mb-6">
             Join The <span className="text-secondary">Velocity</span> <br />
             Circle of Excellence
           </h1>
@@ -22,11 +22,7 @@ const TopSection = () => {
             Rising Stars Collaborating and Moving Together to Achieve Big Things
           </p>
           <div className="mt-12 mb-16 flex justify-center">
-            <Button
-              href="https://forms.zohopublic.com/utiva/form/EyitayoVentureLabandStudio/formperma/XHzFLKsz87gdWAIlyAmvoHdME8sXaQ0hT56Alaj9tZ0"
-              title="GET STARTED"
-              target="_blank"
-            />
+            <Button href="/join-us" title="GET STARTED" />
           </div>
         </div>
 
@@ -42,7 +38,7 @@ const TopSection = () => {
           {/* Class title */}
           <div className="pt-12 pl-6 pb-6 bg-blue-700 text-white">
             <h2 className="text-base md:text-lg lg:text-xl font-semibold">
-              Be a part of the Velocitians!
+              Be a part of the Velocitiers!
             </h2>
           </div>
 
