@@ -20,7 +20,7 @@ const Header = () => {
       >
         <div className="w-2/12">
           <Link href="/" className="text-xl md:text-2xl lg:text-[1.75rem] font-bold text-primary">
-            <Image src={Logo} alt="Logo" className="w-32 lg:w-36" />
+            <Image src={Logo} alt="Logo" className="w-44 lg:w-36" />
             <span className="sr-only">Velocity</span>
           </Link>
         </div>
