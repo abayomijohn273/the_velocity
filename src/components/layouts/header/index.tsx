@@ -18,7 +18,7 @@ const Header = () => {
         className="flex justify-between items-center max-w-7xl mx-auto 
       bg-[#FBFFE7] shadow-[0px_4px_50px_0px_rgba(0,0,0,0.1)] py-3 md:py-3.5 pr-4 md:pr-5 pl-6 lg:pr-[22px] lg:pl-[40px] rounded-full"
       >
-        <div className="w-2/12">
+        <div className="w-5/12 md:w-3/12 lg:w-2/12">
           <Link href="/" className="text-xl md:text-2xl lg:text-[1.75rem] font-bold text-primary">
             <Image src={Logo} alt="Logo" className="w-44 lg:w-36" />
             <span className="sr-only">Velocity</span>
