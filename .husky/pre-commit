@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🚀 Starting pre-commit checks..."
+
+echo "🧹 Stage 1: Running lint-staged to check code formatting and linting..."
+npx lint-staged || {
+  echo "❌ lint-staged failed. Please fix the issues and try again."
+  exit 1
+}
+
+echo "🔍 Stage 2: Running TypeScript type checking..."
+npx tsc --noEmit || {
+  echo "❌ TypeScript type checking failed. Please fix the type errors and try again."
+  exit 1
+}
+
+echo "🏗️ Stage 3: Running build to ensure the project builds successfully..."
+npm run build || {
+  echo "❌ Build failed. Please fix the build errors and try again."
+  exit 1
+}
+
+echo "✅ All checks passed! Committing changes..."
