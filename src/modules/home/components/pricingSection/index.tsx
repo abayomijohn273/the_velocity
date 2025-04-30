@@ -9,7 +9,7 @@ const CheckIcon = () => (
 );
 
 const PricingSection = () => {
-  const [isAnnual, setIsAnnual] = useState(false);
+  const [isAnnual, setIsAnnual] = useState(true);
 
   const pricingOptions = [
     {
@@ -41,8 +41,8 @@ const PricingSection = () => {
         'Access to Partnership, Funding, and Exclusive Spaces',
       ],
       price: {
-        monthly: 200,
-        annual: 2000,
+        monthly: 20,
+        annual: 200,
       },
       ctaText: 'Choose Premium',
       ctaLink: '/join-us',
@@ -63,8 +63,8 @@ const PricingSection = () => {
         'Access to the network of Velocity Consultant',
       ],
       price: {
-        monthly: 500,
-        annual: 5000,
+        monthly: 50,
+        annual: 500,
       },
       ctaText: 'Choose Gold',
       ctaLink: '/join-us',
