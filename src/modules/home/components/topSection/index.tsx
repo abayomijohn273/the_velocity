@@ -12,9 +12,9 @@ const TopSection = () => {
       {/* Hero Section */}
       <div className="px-4 md:px-8 pt-20 pb-16 lg:pb-24 xl:pb-28 max-w-7xl mx-auto">
         <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl lg:leading-tight text-white font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl lg:leading-17 text-white font-bold mb-6">
             Join The <span className="text-secondary">Velocity</span> <br />
-            Circle of Excellence
+            <span className="text-4xl xl:text-5xl">Circle of Excellence</span>
           </h1>
           <p className="text-base md:text-lg mb-6 text-white">
             Be a part of the most exclusive global community of high-achieving professionals.{' '}
