@@ -3,6 +3,7 @@ import AboutSection from './components/aboutSection';
 import CommunitySection from './components/communitySection';
 import CountriesSection from './components/countriesSection';
 import FaqsSection from './components/faqsSection';
+import PricingSection from './components/pricingSection';
 import TopSection from './components/topSection';
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <CountriesSection />
       <AboutSection />
       <CommunitySection />
+      <PricingSection />
       <FaqsSection />
       <Footer />
     </main>
