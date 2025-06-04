@@ -1,8 +1,5 @@
 import Header from '@/components/layouts/header';
 import Button from '@/components/ui/button';
-import TopImage from '../../../../../public/assets/images/webp/top-image.webp';
-
-const HERO_VIDEO_PATH = '/assets/video/hero-video.mp4';
 
 const TopSection = () => {
   return (
@@ -45,16 +42,15 @@ const TopSection = () => {
           {/* Main class area */}
           <div className="px-6">
             <div className="bg-[#DEDEDE]/5 h-[22rem] md:h-[28rem] rounded-xl">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover rounded-xl"
-                poster={TopImage.src}
-              >
-                <source src={HERO_VIDEO_PATH} type="video/mp4" />
-              </video>
+              <iframe
+                className="w-full h-full rounded-xl"
+                src="https://www.youtube.com/embed/5atkOu7kciU?si=WkdAvkXKA6hmvjOf&controls=0&rel=0&showinfo=0&modestbranding=1&playsinline=1&disablekb=1"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
             </div>
           </div>
 
