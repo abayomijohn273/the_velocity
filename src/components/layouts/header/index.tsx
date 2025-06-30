@@ -3,10 +3,18 @@
 import Button from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import Logo from '../../../../public/assets/images/webp/logo.webp';
 
 const Header = () => {
+  const pathname = usePathname();
+  const router = useRouter();
+
   const handleClick = (section: string) => {
+    if (pathname === '/join-us') {
+      router.push('/');
+    }
+
     const element = document.getElementById(section);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
