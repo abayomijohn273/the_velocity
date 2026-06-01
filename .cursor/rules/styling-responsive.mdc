@@ -1,0 +1,39 @@
+---
+description: Tailwind styling, design tokens and mobile-responsive standards for the Velocity UI.
+globs: src/**/*.{tsx,css}
+alwaysApply: false
+---
+
+# Styling & Responsiveness
+
+Tailwind CSS v4 is configured via `src/styles/theme.css` (`@theme` tokens). Style with utility classes inline.
+
+## Design Tokens
+
+- Prefer semantic tokens over raw hex: `text-primary` (`#012c18`), `bg-secondary` (`#7b9404`), `text-black` (`#1d1e22`), `text-white`.
+- Use Tailwind arbitrary values (`bg-[#FCFAF1]`) only for genuine one-off shades not in the theme. If a color repeats, add it to `theme.css` first.
+- Fonts come from CSS variables (`--font-inter`, `--font-silka`); `font-sans` is the default — don't import fonts ad hoc.
+
+## Section & Layout Patterns
+
+- Each page section is a `<section>` with an `id` when it's an anchor target (`id="about"`, `id="faqs"`).
+- Center content with the container pattern: `max-w-7xl mx-auto` (or `max-w-6xl`/`max-w-3xl`) plus horizontal padding (`px-4`, `px-5 sm:px-6 lg:px-8`).
+- Use consistent vertical rhythm for sections: `py-20 md:py-28 lg:py-32`.
+
+## Mobile-First Responsiveness (required)
+
+- Write base (mobile) styles first, then layer `sm:` `md:` `lg:` `xl:` `2xl:` overrides. Never design desktop-only.
+
+```tsx
+<h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Heading</h2>
+```
+
+- Stack on mobile, expand on larger screens (`flex-col lg:flex-row`, `grid-cols-1 md:grid-cols-3`).
+- Toggle visibility with `hidden md:block` / `md:hidden` for nav and decorative elements.
+- For fluid sizing prefer `clamp()` (see `imageBox.tsx`) over hardcoded desktop dimensions.
+- Verify every new UI at mobile, tablet, and desktop widths before finishing.
+
+## Consistency
+
+- Match existing interaction styling: `transition-all duration-300 ease-in-out`, rounded pills (`rounded-full`), gradient primary buttons via the shared `Button`.
+- Keep class lists ordered layout → spacing → color → typography → state, mirroring nearby files.

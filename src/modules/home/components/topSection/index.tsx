@@ -33,7 +33,7 @@ const TopSection = () => {
           </div>
 
           {/* Class title */}
-          <div className="pt-12 pl-6 pb-6 bg-blue-700 text-white">
+          <div className="pt-12 pl-6 pb-6 bg-transparent text-white">
             <h2 className="text-base md:text-lg lg:text-xl font-semibold">
               Be a part of the Velocitiers!
             </h2>
@@ -55,7 +55,7 @@ const TopSection = () => {
           </div>
 
           {/* Controls bar */}
-          <div className="bg-blue-700 px-6 py-4 flex justify-between items-center">
+          <div className="bg-transparent px-6 py-4 flex justify-between items-center">
             <div className="flex items-center gap-6">
               <div className="w-6 h-6 bg-white/20 rounded-full"></div>
               <div className="w-6 h-6 bg-white/20 rounded-full"></div>{' '}

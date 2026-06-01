@@ -100,14 +100,14 @@ const AboutSection = () => {
             md:justify-between md:absolute md:top-1/2 md:left-0 md:-translate-y-[4rem] md:z-10"
           >
             <button
-              className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center transform rotate-180 md:-ml-4"
+              className="w-12 h-12 rounded-full cursor-pointer bg-white flex items-center justify-center transform rotate-180 md:-ml-4"
               onClick={handlePrevClick}
               aria-label="Previous slide"
             >
               <ArrowIcon />
             </button>
             <button
-              className="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center md:-mr-4"
+              className="w-12 h-12 rounded-full cursor-pointer bg-white flex items-center justify-center md:-mr-4"
               onClick={handleNextClick}
               aria-label="Next slide"
             >
