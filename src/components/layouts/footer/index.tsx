@@ -36,17 +36,17 @@ const Footer = () => {
                     </Link>{' '}
                     or{' '}
                     <Link
-                      href="tel:+447365341566"
+                      href="tel:+12023693961"
                       className="text-primary font-semibold hover:underline"
                     >
-                      +447365341566
+                      +1 (202) 369-3961
                     </Link>
                   </span>
                 </div>
 
                 <div className="flex mb-6">
                   <SocialLink
-                    href="https://www.instagram.com/thevelocity.hq"
+                    href="https://www.instagram.com/TheVelocity_hq"
                     icon={<InstagramIcon />}
                     ariaLabel="Follow us on Instagram"
                   />
