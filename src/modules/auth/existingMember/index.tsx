@@ -1,14 +1,14 @@
 'use client';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
-import AuthLayout from '@/modules/auth/components/authLayout';
-import EmailStepForm from '@/modules/auth/components/emailStepForm';
 import { useExistingMember } from '@/hooks/auth';
 import { getErrorMessage } from '@/lib/api/formErrors';
 import { routes } from '@/lib/constants/routes';
 import type { EmailOnlyInput } from '@/lib/validation/auth';
+import AuthLayout from '@/modules/auth/components/authLayout';
+import EmailStepForm from '@/modules/auth/components/emailStepForm';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const ExistingMember = () => {
   const router = useRouter();
