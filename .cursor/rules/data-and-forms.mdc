@@ -1,0 +1,34 @@
+---
+description: Conventions for API routes, data access, auth, forms and data fetching in the Velocity app.
+globs: src/app/api/**/*.ts,src/lib/**/*.ts,src/hooks/**/*.ts,src/modules/**/*.tsx
+alwaysApply: false
+---
+
+# API, Data & Forms
+
+## Server boundaries
+
+- Server-only modules (`lib/config`, `lib/db`, `lib/auth/*` using secrets, `lib/email`) start with `import 'server-only';`. Never import them into client components.
+- Talk to Postgres only through the `lib/db/*` repositories (which use `getSupabaseAdmin()`); don't call Supabase directly from routes.
+- Read env via `lib/config/env` (lazy getters) — never `process.env.*` scattered in features.
+
+## API routes
+
+- Wrap every handler in `withApi(...)`; parse input with `parseBody(req, zodSchema)`. Throw `ApiError(message, status)` for expected failures.
+- Always return `success(data, status?)` / `failure(...)` so responses share the `{ success, data | message }` envelope.
+- Protect routes with `await requireAuth()` (throws 401). Validate with the shared zod schemas in `lib/validation`.
+- Never leak secrets or password hashes; map rows to client types with `toAuthUser` / `toUserProfile`.
+
+## Client data fetching
+
+- Use React Query hooks (`hooks/auth`, `hooks/profile`) — never call `fetch` directly in components. Hooks use the `apiFetch` wrapper (sends cookies, unwraps the envelope, redirects to `/login` on 401).
+
+## Forms
+
+- Use `react-hook-form` + `zodResolver` with a schema from `lib/validation`. Render fields with the `ui/` primitives (`input`, `inputPassword`, `inputPhone`, `select`, `otpInput`).
+- Controlled inputs (`inputPhone`, `select`) go through `<Controller>`. Show errors via the field's `error` prop.
+- On submit: `toast.success` on success and navigate; on error `toast.error(getErrorMessage(error))` and `applyApiFieldErrors(error, setError)` for field-level messages.
+
+## Routes & redirects
+
+- Reference paths via `lib/constants/routes`; never hardcode route strings. Page protection lives in `middleware.ts`.

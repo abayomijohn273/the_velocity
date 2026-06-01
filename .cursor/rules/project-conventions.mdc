@@ -1,0 +1,40 @@
+---
+description: Core architecture, structure, naming and tooling conventions for the Velocity codebase. Read before implementing or changing anything.
+alwaysApply: true
+---
+
+# Velocity Project Conventions
+
+Next.js 15 (App Router) + React 19 + TypeScript + Tailwind CSS v4. Always follow the patterns below so new work matches existing code.
+
+## Folder Architecture
+
+- `src/app/` — routing only. Pages stay thin and render a module: `const Page = () => <Home />;`. Keep all UI/logic out of here.
+- `src/modules/<feature>/` — feature code. Entry is `index.tsx`; section/sub-components live in `components/<sectionName>/`.
+- `src/components/` — shared, cross-feature code: `ui/` (primitives like `button`) and `layouts/` (`header`, `footer`).
+- `src/styles/` — `globals.css`, `theme.css` (Tailwind v4 `@theme` tokens), `font.ts`.
+- Route page → module `index.tsx` → section `components/<name>/index.tsx` → split sub-components. Don't bypass this layering.
+
+## Naming Conventions
+
+- **Folders + non-component files: `camelCase`** (`aboutSection/`, `joinUs/`, `imageBox.tsx`, `marqueeRow.tsx`, `ctaSection.tsx`). This is the required convention — do not introduce `kebab-case` or `snake_case` files.
+- Section/feature entry file is always `index.tsx`.
+- Exported React components are `PascalCase` even though the file is `camelCase` (file `featureCard.tsx` → `export default FeatureCard`).
+- Variables, functions, props, handlers: `camelCase`; event handlers prefixed `handle` (`handlePrevClick`).
+- Types/interfaces: `PascalCase`, props interfaces suffixed `Props` (`FeatureCardProps`).
+
+## Imports
+
+- Use the `@/` alias for everything under `src/` (`@/components/ui/button`, `@/styles/font`). Use relative paths only for sibling files and `public/` assets.
+- Use `next/image` for images and `next/link` for internal navigation — never raw `<img>`/`<a>` for internal routes.
+
+## Tooling (must pass)
+
+- Prettier: single quotes, semicolons, 2-space indent, `printWidth` 100, `trailingComma: es5`.
+- ESLint extends `next/core-web-vitals` + `next/typescript`; `no-console` and `no-unused-vars` are warnings — keep output clean.
+- `lint-staged` + Husky run `eslint --fix` and `prettier --write` on commit. Run `npm run lint` / `npm run format` before finishing.
+- TypeScript is `strict`. No `any`; type all props and state.
+
+## After Any Change
+
+- Keep the `README.md` updated when structure, scripts, conventions, or features change.

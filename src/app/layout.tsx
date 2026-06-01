@@ -1,3 +1,4 @@
+import Providers from '@/app/providers';
 import { inter, silka } from '@/styles/font';
 import type { Metadata } from 'next';
 import '../styles/globals.css';
@@ -14,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${silka.variable} ${inter.variable} antialiased`}>
-      <body suppressHydrationWarning={true}>{children}</body>
+      <body suppressHydrationWarning={true}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

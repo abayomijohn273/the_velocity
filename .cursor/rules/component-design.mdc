@@ -1,0 +1,52 @@
+---
+description: Component design, TypeScript typing, accessibility and code-quality standards for React/TSX files.
+globs: src/**/*.tsx
+alwaysApply: false
+---
+
+# Component Design Standards
+
+## Structure
+
+- Functional components only, as arrow functions with a default export:
+
+```tsx
+const FeatureCard = ({ title }: FeatureCardProps) => {
+  return <div>{title}</div>;
+};
+
+export default FeatureCard;
+```
+
+- Add `'use client';` as the first line **only** when the component uses hooks, state, browser APIs, or event handlers. Keep components server components by default.
+- One component per file. When a section grows, split presentational pieces into sibling files (e.g. `featureCard.tsx`, `icons.tsx`) and compose them from the section `index.tsx`.
+
+## DRY & Composition
+
+- Reuse shared primitives instead of re-implementing them (e.g. always use `@/components/ui/button`, never hand-roll a styled link button).
+- Render repeated UI by mapping over a local data array (see `pricingOptions`, `faqItems`, `countries`) rather than copy-pasting markup.
+- Extract a sub-component once markup repeats or a block exceeds ~40 lines / has its own concern.
+
+## Separation of Concerns
+
+- Data arrays and config live at the top of the component; markup stays declarative below.
+- Keep layout/routing in pages and modules; keep visual rendering in components. Don't fetch or compute business logic inside presentational components.
+
+## TypeScript Typing
+
+- Type every prop. Use a `PascalCase` `...Props` interface for reusable/multi-prop components; inline object types are acceptable for tiny local components.
+- Type state and refs explicitly when not obvious (`useState<number | null>(0)`, `useRef<HTMLDivElement>(null)`).
+- Never use `any`. Use library types (`StaticImageData`, `Swiper as SwiperType`).
+
+## Accessibility (required on every component)
+
+- Icon-only buttons/links need `aria-label`; logo links include an `sr-only` text label.
+- Interactive accordions/toggles set state-reflecting attributes (`aria-expanded`).
+- All `Image`/`img` need meaningful `alt`; external links use `target="_blank"` with `rel="noopener noreferrer"`.
+- Use semantic elements: `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`, headings in order.
+
+## Avoid Anti-Patterns
+
+- No prop drilling more than ~2 levels — compose or colocate instead.
+- No unnecessary state or effects; derive values during render when possible.
+- No inline narrating comments. Add a comment only to explain non-obvious intent or a constraint (see the marquee animation math).
