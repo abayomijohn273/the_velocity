@@ -1,6 +1,5 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
 import { apiFetch } from '@/lib/api/client';
 import type {
   EmailOnlyInput,
@@ -11,6 +10,7 @@ import type {
   VerifyOtpInput,
 } from '@/lib/validation/auth';
 import type { AuthUser } from '@/types/user';
+import { useMutation } from '@tanstack/react-query';
 
 const post = <T>(path: string, body: unknown) =>
   apiFetch<T>(path, { method: 'POST', body: JSON.stringify(body) });
