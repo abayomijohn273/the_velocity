@@ -1,16 +1,16 @@
 'use client';
 
+import FormButton from '@/components/ui/formButton';
+import OtpInput from '@/components/ui/otpInput';
+import { useResendOtp, useVerifyOtp } from '@/hooks/auth';
+import { getErrorMessage } from '@/lib/api/formErrors';
+import { routes } from '@/lib/constants/routes';
+import AuthLayout from '@/modules/auth/components/authLayout';
+import type { OtpPurpose } from '@/types/user';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
-import OtpInput from '@/components/ui/otpInput';
-import FormButton from '@/components/ui/formButton';
-import AuthLayout from '@/modules/auth/components/authLayout';
-import { useResendOtp, useVerifyOtp } from '@/hooks/auth';
-import { getErrorMessage } from '@/lib/api/formErrors';
-import { routes } from '@/lib/constants/routes';
-import type { OtpPurpose } from '@/types/user';
 
 const RESEND_SECONDS = 45;
 
@@ -116,14 +116,17 @@ const VerifyOtp = () => {
               type="button"
               onClick={handleResend}
               disabled={resend.isPending}
-              className="font-semibold text-secondary underline disabled:opacity-50"
+              className="font-semibold text-secondary underline disabled:opacity-50 cursor-pointer"
             >
               Resend code
             </button>
           )}
         </p>
 
-        <Link href={routes.login} className="text-sm font-medium text-gray-500 underline">
+        <Link
+          href={routes.login}
+          className="text-sm font-medium text-gray-500 underline cursor-pointer"
+        >
           Back to login
         </Link>
       </div>

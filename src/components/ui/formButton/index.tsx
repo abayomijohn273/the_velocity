@@ -27,7 +27,7 @@ const FormButton = ({
   return (
     <button
       disabled={disabled || loading}
-      className={`flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-300 disabled:cursor-not-allowed ${
+      className={`flex items-center cursor-pointer justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-300 disabled:cursor-not-allowed ${
         variants[variant]
       } ${fullWidth ? 'w-full' : 'w-fit'} ${className ?? ''}`}
       {...props}

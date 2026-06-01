@@ -1,15 +1,15 @@
 'use client';
 
+import { useLogout } from '@/hooks/auth';
+import { useCurrentUser } from '@/hooks/auth/useCurrentUser';
+import { getErrorMessage } from '@/lib/api/formErrors';
+import { routes } from '@/lib/constants/routes';
 import { SignOut } from '@phosphor-icons/react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import WelcomeModal from './components/welcomeModal';
-import { useLogout } from '@/hooks/auth';
-import { useCurrentUser } from '@/hooks/auth/useCurrentUser';
-import { getErrorMessage } from '@/lib/api/formErrors';
-import { routes } from '@/lib/constants/routes';
 
 const Dashboard = () => {
   const router = useRouter();
@@ -53,7 +53,7 @@ const Dashboard = () => {
             type="button"
             onClick={handleLogout}
             disabled={logout.isPending}
-            className="flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-black transition hover:bg-gray-50 disabled:opacity-50"
+            className="flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-black transition hover:bg-gray-50 disabled:opacity-50 cursor-pointer"
           >
             <SignOut size={18} />
             Log out
