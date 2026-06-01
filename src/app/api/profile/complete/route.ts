@@ -12,6 +12,7 @@ export const POST = withApi(async (req) => {
   const profileRow = await upsertProfile(user.id, {
     ...input,
     referredBy: input.referredBy || null,
+    avatar: input.avatar || null,
   });
   await updateUser(user.id, { is_registration_complete: true });
 

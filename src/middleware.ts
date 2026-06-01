@@ -90,6 +90,7 @@ export const config = {
     '/api/:path*',
     '/dashboard/:path*',
     '/complete-profile/:path*',
+    '/settings/:path*',
     '/login',
     '/signup',
     '/verify-otp',

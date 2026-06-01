@@ -61,6 +61,17 @@ export const env = {
   get adminEmail() {
     return required('ADMIN_EMAIL');
   },
+  imagekit: {
+    get publicKey() {
+      return required('IMAGEKIT_PUBLIC_KEY');
+    },
+    get privateKey() {
+      return required('IMAGEKIT_PRIVATE_KEY');
+    },
+    get urlEndpoint() {
+      return required('IMAGEKIT_URL_ENDPOINT');
+    },
+  },
 } as const;
 
 /** Token lifetime in seconds (7 days). Kept in sync with the cookie max-age. */

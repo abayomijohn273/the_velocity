@@ -2,11 +2,12 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import ProfileForm from './profileForm';
+import ProfileForm, { type AvatarSelection } from './profileForm';
 import { useCurrentUser } from '@/hooks/auth/useCurrentUser';
 import { useCompleteProfile } from '@/hooks/profile/useCompleteProfile';
+import { useUploadAvatar } from '@/hooks/profile/useUploadAvatar';
 import { getErrorMessage } from '@/lib/api/formErrors';
 import { routes } from '@/lib/constants/routes';
 import type { CompleteProfileInput } from '@/lib/validation/profile';
@@ -15,6 +16,8 @@ const CompleteProfile = () => {
   const router = useRouter();
   const { data, isLoading } = useCurrentUser();
   const completeProfile = useCompleteProfile();
+  const uploadAvatar = useUploadAvatar();
+  const [submitting, setSubmitting] = useState(false);
 
   // Already-complete users shouldn't see this screen.
   useEffect(() => {
@@ -23,14 +26,18 @@ const CompleteProfile = () => {
     }
   }, [data, router]);
 
-  const onValid = (values: CompleteProfileInput) => {
-    completeProfile.mutate(values, {
-      onSuccess: () => {
-        toast.success('Profile completed. Welcome aboard!');
-        router.replace(`${routes.dashboard}?welcome=true`);
-      },
-      onError: (error) => toast.error(getErrorMessage(error)),
-    });
+  const onValid = async (values: CompleteProfileInput, avatar: AvatarSelection) => {
+    setSubmitting(true);
+    try {
+      const avatarUrl = avatar.file ? (await uploadAvatar.mutateAsync(avatar.file)).url : '';
+      await completeProfile.mutateAsync({ ...values, avatar: avatarUrl });
+      toast.success('Profile completed. Welcome aboard!');
+      router.replace(`${routes.dashboard}?welcome=true`);
+    } catch (error) {
+      toast.error(getErrorMessage(error));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -54,11 +61,7 @@ const CompleteProfile = () => {
         {isLoading ? (
           <p className="text-sm text-gray-500">Loading…</p>
         ) : (
-          <ProfileForm
-            email={data?.user.email ?? ''}
-            loading={completeProfile.isPending}
-            onValid={onValid}
-          />
+          <ProfileForm email={data?.user.email ?? ''} loading={submitting} onValid={onValid} />
         )}
       </div>
     </main>

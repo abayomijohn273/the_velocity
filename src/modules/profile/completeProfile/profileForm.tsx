@@ -1,7 +1,9 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import AvatarUpload from '@/components/ui/avatarUpload';
 import Input from '@/components/ui/input';
 import InputPhone from '@/components/ui/inputPhone';
 import Select from '@/components/ui/select';
@@ -11,13 +13,31 @@ import { currentRoles } from '@/lib/constants/currentRoles';
 import { industries } from '@/lib/constants/industries';
 import { completeProfileSchema, type CompleteProfileInput } from '@/lib/validation/profile';
 
+export interface AvatarSelection {
+  file: File | null;
+  removeExisting: boolean;
+}
+
 interface ProfileFormProps {
   email: string;
   loading: boolean;
-  onValid: (values: CompleteProfileInput) => void;
+  onValid: (values: CompleteProfileInput, avatar: AvatarSelection) => void;
+  defaultValues?: Partial<CompleteProfileInput>;
+  currentAvatarUrl?: string | null;
+  submitLabel?: string;
 }
 
-const ProfileForm = ({ email, loading, onValid }: ProfileFormProps) => {
+const ProfileForm = ({
+  email,
+  loading,
+  onValid,
+  defaultValues,
+  currentAvatarUrl,
+  submitLabel = 'Complete profile',
+}: ProfileFormProps) => {
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [removeAvatar, setRemoveAvatar] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -25,11 +45,35 @@ const ProfileForm = ({ email, loading, onValid }: ProfileFormProps) => {
     formState: { errors },
   } = useForm<CompleteProfileInput>({
     resolver: zodResolver(completeProfileSchema),
-    defaultValues: { phoneNumber: '', whatsappNumber: '', referredBy: '' },
+    defaultValues: {
+      phoneNumber: '',
+      whatsappNumber: '',
+      referredBy: '',
+      ...defaultValues,
+    },
   });
 
+  const submit = (values: CompleteProfileInput) =>
+    onValid(values, { file: avatarFile, removeExisting: removeAvatar });
+
+  const existingAvatar = removeAvatar ? null : (currentAvatarUrl ?? null);
+
   return (
-    <form onSubmit={handleSubmit(onValid)} className="flex flex-col gap-5" noValidate>
+    <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-5" noValidate>
+      <AvatarUpload
+        value={avatarFile}
+        existingUrl={existingAvatar}
+        onChange={(file) => {
+          setAvatarFile(file);
+          if (file) setRemoveAvatar(false);
+        }}
+        onRemoveExisting={() => {
+          setRemoveAvatar(true);
+          setAvatarFile(null);
+        }}
+        disabled={loading}
+      />
+
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Input
           label="First name"
@@ -140,7 +184,7 @@ const ProfileForm = ({ email, loading, onValid }: ProfileFormProps) => {
       />
 
       <FormButton type="submit" loading={loading} className="mt-2">
-        Complete profile
+        {submitLabel}
       </FormButton>
     </form>
   );

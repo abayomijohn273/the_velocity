@@ -11,6 +11,7 @@ export const routes = {
   resetPassword: '/reset-password',
   completeProfile: '/complete-profile',
   dashboard: '/dashboard',
+  settings: '/settings',
 } as const;
 
 /** Routes a signed-in user should be bounced away from back to the dashboard. */
@@ -26,4 +27,8 @@ export const authRoutes: string[] = [
 ];
 
 /** Routes that require a valid session. */
-export const protectedRoutes: string[] = [routes.completeProfile, routes.dashboard];
+export const protectedRoutes: string[] = [
+  routes.completeProfile,
+  routes.dashboard,
+  routes.settings,
+];

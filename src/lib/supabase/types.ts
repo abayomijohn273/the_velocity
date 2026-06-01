@@ -23,6 +23,7 @@ export interface ProfileRow {
   industry: string;
   dob: string;
   referred_by: string | null;
+  avatar: string | null;
   created_at: string;
   updated_at: string;
 }

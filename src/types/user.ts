@@ -22,4 +22,5 @@ export interface UserProfile {
   industry: string;
   dob: string;
   referredBy: string | null;
+  avatar: string | null;
 }

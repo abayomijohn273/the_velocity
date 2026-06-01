@@ -17,6 +17,7 @@ export const toUserProfile = (row: ProfileRow, email: string): UserProfile => ({
   industry: row.industry,
   dob: row.dob,
   referredBy: row.referred_by,
+  avatar: row.avatar,
 });
 
 export const getProfile = async (userId: string): Promise<ProfileRow | null> => {
@@ -39,6 +40,7 @@ export interface UpsertProfileInput {
   industry: string;
   dob: string;
   referredBy?: string | null;
+  avatar?: string | null;
 }
 
 export const upsertProfile = async (
@@ -59,6 +61,7 @@ export const upsertProfile = async (
       industry: input.industry,
       dob: input.dob,
       referred_by: input.referredBy ?? null,
+      avatar: input.avatar ?? null,
     })
     .select('*')
     .single();

@@ -29,6 +29,8 @@ npm run db:migrate
 
 This creates the `users`, `profiles`, and `otp_codes` tables plus the
 `user_role` (`user` | `admin`, default `user`) and `otp_purpose` enums.
+Later migrations add the `profiles.avatar` column and the `member_directory`
+view that powers the dashboard community list.
 
 > **Key note:** `SUPABASE_SERVICE_ROLE_KEY` must be the **secret** key
 > (`sb_secret_…` / `service_role`), not the publishable/anon key — the server
@@ -92,6 +94,23 @@ Flows:
 - **Existing member:** _Activate your account_ → enter email → OTP → set password → login.
 - **Forgot password:** enter email → OTP → reset password → login.
 
+### Dashboard — community directory
+
+The dashboard lists all community members in a responsive card grid (avatar or initials
+placeholder, country flag, name, email, LinkedIn, current role, industry). `GET /api/members`
+(auth-protected) returns paginated results — 12 per page — and accepts `page`, `search`
+(matches name or email), `currentRole`, and `industry` filters. The UI uses skeleton cards while
+loading and an empty state when no members match.
+
+### Profile photos & settings
+
+Profile photos are optional. The picker holds the chosen image locally and only uploads on submit:
+the file is sent to `POST /api/upload/avatar`, which stores it in the ImageKit `velocity` folder and
+returns the URL that is then saved with the profile. The authenticated app header (shared by the
+dashboard and settings) shows the user's avatar, name, and email with a Headless UI menu linking to
+**Settings** and **Log out**. The `/settings` page reuses the profile form (every field except email
+is editable) and `PATCH /api/profile`, with a log-out card at the bottom.
+
 Stack: **react-hook-form** + **zod** (forms/validation), **@tanstack/react-query**
 (queries/mutations), **react-hot-toast** (feedback), **@headlessui/react** (modals + Listbox
 selects), **@phosphor-icons/react** (icons), **nodemailer** + Google SMTP (OTP / welcome /
@@ -100,8 +119,9 @@ admin-notification emails).
 ### Environment variables
 
 See [`.env.example`](.env.example). Required: Supabase (`NEXT_PUBLIC_SUPABASE_URL`,
-`SUPABASE_SERVICE_ROLE_KEY`), `JWT_SECRET`, Google SMTP (`SMTP_*`, `EMAIL_FROM_*`), and
-`ADMIN_EMAIL`.
+`SUPABASE_SERVICE_ROLE_KEY`), `JWT_SECRET`, Google SMTP (`SMTP_*`, `EMAIL_FROM_*`),
+`ADMIN_EMAIL`, and ImageKit (`IMAGEKIT_PUBLIC_KEY`, `IMAGEKIT_PRIVATE_KEY`,
+`IMAGEKIT_URL_ENDPOINT`) for avatar uploads.
 
 ## Conventions
 

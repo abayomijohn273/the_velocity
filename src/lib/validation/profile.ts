@@ -1,6 +1,6 @@
-import { z } from 'zod';
 import { currentRoles } from '@/lib/constants/currentRoles';
 import { industries } from '@/lib/constants/industries';
+import { z } from 'zod';
 
 const roleValues = currentRoles.map((option) => option.value);
 const industryValues = industries.map((option) => option.value);
@@ -26,6 +26,7 @@ export const completeProfileSchema = z.object({
     .refine((value) => industryValues.includes(value), 'Select your industry'),
   dob: z.string().min(1, 'Date of birth is required'),
   referredBy: z.string().trim().optional().or(z.literal('')),
+  avatar: z.union([z.string().url(), z.literal(''), z.null()]).optional(),
 });
 
 export type CompleteProfileInput = z.infer<typeof completeProfileSchema>;
