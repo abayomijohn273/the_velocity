@@ -19,7 +19,7 @@ const TopSection = () => {
             Rising Stars Collaborating and Moving Together to Achieve Big Things
           </p>
           <div className="mt-12 mb-16 flex justify-center">
-            <Button href="/signup" title="GET STARTED" />
+            <Button href="/join-us" title="GET STARTED" />
           </div>
         </div>
 

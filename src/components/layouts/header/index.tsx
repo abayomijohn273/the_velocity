@@ -59,7 +59,7 @@ const Header = () => {
               BE A SPONSOR
             </Link> */}
 
-            <Button href="/signup" title="GET STARTED" />
+            <Button href="/join-us" title="GET STARTED" />
           </div>
         </div>
       </nav>
