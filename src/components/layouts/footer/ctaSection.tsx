@@ -12,7 +12,7 @@ const CtaSection = () => {
     <section className="bg-[#FCFAF1] relative">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-[7.438rem] pb-[6rem]">
         <div className="flex justify-end">
-          <Button href="/signup" title="GET STARTED" variant="secondary" />
+          <Button href="/join-us" title="GET STARTED" variant="secondary" />
         </div>
 
         <div className="mt-4">
