@@ -47,15 +47,24 @@ const MemberCard = ({ member }: { member: Member }) => {
       )}
 
       <div className="mt-5 flex items-center gap-3">
-        <Link
-          href={`mailto:${member.email}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Email ${fullName}`}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 text-gray-600 transition hover:bg-primary hover:text-white"
-        >
-          <Envelope size={18} />
-        </Link>
+        {member.email ? (
+          <Link
+            href={`mailto:${member.email}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Email ${fullName}`}
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 text-gray-600 transition hover:bg-primary hover:text-white"
+          >
+            <Envelope size={18} />
+          </Link>
+        ) : (
+          <span
+            title="Verify your account to unlock contact info"
+            className="flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-full bg-gray-50 text-gray-300"
+          >
+            <Envelope size={18} />
+          </span>
+        )}
         {member.linkedinUrl && (
           <Link
             href={member.linkedinUrl}

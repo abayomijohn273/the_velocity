@@ -2,17 +2,17 @@ import { NextResponse } from 'next/server';
 import { ZodError, type ZodType } from 'zod';
 import { ApiError, failure } from './response';
 
-type Handler = (req: Request) => Promise<NextResponse> | NextResponse;
+type Handler<Ctx = unknown> = (req: Request, ctx: Ctx) => Promise<NextResponse> | NextResponse;
 
 /**
  * Wraps an API route handler with consistent error handling so individual
  * routes stay focused on business logic (DRY).
  */
 export const withApi =
-  (handler: Handler) =>
-  async (req: Request): Promise<NextResponse> => {
+  <Ctx = unknown>(handler: Handler<Ctx>) =>
+  async (req: Request, ctx: Ctx): Promise<NextResponse> => {
     try {
-      return await handler(req);
+      return await handler(req, ctx);
     } catch (error) {
       if (error instanceof ApiError) {
         return failure(error.message, error.statusCode);
