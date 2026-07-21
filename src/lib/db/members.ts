@@ -15,16 +15,16 @@ interface MemberRow {
   linkedin_url: string | null;
 }
 
-const toMember = (row: MemberRow): Member => ({
+const toMember = (row: MemberRow, viewerIsMonetized: boolean): Member => ({
   userId: row.user_id,
-  email: row.email,
+  email: viewerIsMonetized ? row.email : null,
   firstName: row.first_name,
   lastName: row.last_name,
   avatar: row.avatar,
   currentRole: row.current_role,
   industry: row.industry,
   countryOfResidence: row.country_of_residence,
-  linkedinUrl: row.linkedin_url,
+  linkedinUrl: viewerIsMonetized ? row.linkedin_url : null,
 });
 
 export interface ListMembersParams {
@@ -32,6 +32,7 @@ export interface ListMembersParams {
   search?: string;
   currentRole?: string;
   industry?: string;
+  viewerIsMonetized: boolean;
 }
 
 export const listMembers = async ({
@@ -39,6 +40,7 @@ export const listMembers = async ({
   search = '',
   currentRole = '',
   industry = '',
+  viewerIsMonetized,
 }: ListMembersParams): Promise<PaginatedMembers> => {
   const from = (page - 1) * MEMBERS_PER_PAGE;
   const to = from + MEMBERS_PER_PAGE - 1;
@@ -61,7 +63,7 @@ export const listMembers = async ({
 
   const total = count ?? 0;
   return {
-    items: (data as MemberRow[] | null)?.map(toMember) ?? [],
+    items: (data as MemberRow[] | null)?.map((row) => toMember(row, viewerIsMonetized)) ?? [],
     page,
     limit: MEMBERS_PER_PAGE,
     total,

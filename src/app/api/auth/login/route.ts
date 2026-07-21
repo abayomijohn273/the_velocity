@@ -23,6 +23,13 @@ export const POST = withApi(async (req) => {
     throw new ApiError('Please verify your email before logging in.', 403);
   }
 
+  if (user.account_status !== 'approved') {
+    throw new ApiError(
+      'Your account has not been approved yet. Please reach out to the admin to get approved.',
+      403
+    );
+  }
+
   const token = await signToken({ sub: user.id, email: user.email, role: user.role });
   await setAuthCookie(token);
 

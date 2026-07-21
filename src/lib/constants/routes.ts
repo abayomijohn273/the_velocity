@@ -12,6 +12,7 @@ export const routes = {
   completeProfile: '/complete-profile',
   dashboard: '/dashboard',
   settings: '/settings',
+  admin: '/admin',
 } as const;
 
 /** Routes a signed-in user should be bounced away from back to the dashboard. */
@@ -31,4 +32,8 @@ export const protectedRoutes: string[] = [
   routes.completeProfile,
   routes.dashboard,
   routes.settings,
+  routes.admin,
 ];
+
+/** Routes that additionally require the admin role. */
+export const adminRoutes: string[] = [routes.admin];
