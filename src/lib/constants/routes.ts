@@ -13,6 +13,7 @@ export const routes = {
   dashboard: '/dashboard',
   settings: '/settings',
   admin: '/admin',
+  aiLaunchHour: '/ai-launch-hour',
 } as const;
 
 /** Routes a signed-in user should be bounced away from back to the dashboard. */
