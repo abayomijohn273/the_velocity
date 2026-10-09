@@ -82,13 +82,6 @@ const BuildersSection = () => {
             </figure>
           ))}
         </div>
-        <p className={styles.photoCredit}>
-          Authentic event photography from Hack4Futo at the Federal University of Technology,
-          Owerri.{' '}
-          <a href="https://www.hack4futo.org/" target="_blank" rel="noopener">
-            Photo source ↗
-          </a>
-        </p>
       </div>
     </section>
   );
