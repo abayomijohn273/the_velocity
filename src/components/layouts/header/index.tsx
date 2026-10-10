@@ -13,7 +13,6 @@ const Header = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
   return (
     <header className="relative pt-6 md:pt-8 px-4 md:px-0">
       <nav
