@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/components/ui/button';
+import { routes } from '@/lib/constants/routes';
 import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '../../../../public/assets/images/webp/logo.webp';
@@ -51,13 +52,13 @@ const Header = () => {
           </div>
 
           <div className="items-center gap-6 hidden md:flex">
-            {/* <Link
-              href="/login"
-              className="hidden md:block text-primary focus:outline-none ring-0 
+            <Link
+              href={routes.login}
+              className="hidden md:block text-primary focus:outline-none ring-0
             font-semibold hover:text-secondary transition-all duration-300 cursor-pointer"
             >
-              BE A SPONSOR
-            </Link> */}
+              Login
+            </Link>
 
             <Button href="/join-us" title="GET STARTED" />
           </div>

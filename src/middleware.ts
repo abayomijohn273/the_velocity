@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { verifyToken } from '@/lib/auth/jwt';
 import { limitForPath, rateLimit } from '@/lib/api/rateLimit';
-import { authRoutes, protectedRoutes, routes } from '@/lib/constants/routes';
+import { adminRoutes, authRoutes, protectedRoutes, routes } from '@/lib/constants/routes';
 
 const AUTH_COOKIE = 'velocity_token';
 
@@ -61,6 +61,7 @@ const handlePage = async (req: NextRequest): Promise<NextResponse> => {
   const session = token ? await verifyToken(token) : null;
 
   const isProtected = protectedRoutes.some((path) => pathname.startsWith(path));
+  const isAdminRoute = adminRoutes.some((path) => pathname.startsWith(path));
   const isAuthRoute = authRoutes.some((path) => pathname.startsWith(path));
 
   // Expired/absent token on a protected route → clear cookie and send to login.
@@ -68,6 +69,13 @@ const handlePage = async (req: NextRequest): Promise<NextResponse> => {
     const res = NextResponse.redirect(new URL(routes.login, req.url));
     res.cookies.delete(AUTH_COOKIE);
     return applySecurityHeaders(res);
+  }
+
+  // Signed in but not an admin, trying to reach the admin dashboard → bounce home.
+  // This is a UX-only edge check (JWT role can be stale); every /api/admin/*
+  // route re-verifies the role from the database via requireAdmin().
+  if (isAdminRoute && session && session.role !== 'admin') {
+    return applySecurityHeaders(NextResponse.redirect(new URL(routes.dashboard, req.url)));
   }
 
   // Already signed in but visiting an auth page → go to the dashboard.
@@ -91,6 +99,7 @@ export const config = {
     '/dashboard/:path*',
     '/complete-profile/:path*',
     '/settings/:path*',
+    '/admin/:path*',
     '/login',
     '/signup',
     '/verify-otp',

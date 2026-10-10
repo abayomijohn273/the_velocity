@@ -1,10 +1,12 @@
-import type { OtpPurpose, UserRole } from '@/types/user';
+import type { AccountStatus, OtpPurpose, UserRole } from '@/types/user';
 
 export interface UserRow {
   id: string;
   email: string;
   password_hash: string | null;
   role: UserRole;
+  account_status: AccountStatus;
+  is_monetized: boolean;
   is_email_verified: boolean;
   is_registration_complete: boolean;
   created_at: string;

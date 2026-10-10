@@ -28,7 +28,11 @@ const Login = () => {
     login.mutate(values, {
       onSuccess: ({ user }) => {
         toast.success('Welcome back!');
-        router.replace(user.isRegistrationComplete ? routes.dashboard : routes.completeProfile);
+        if (user.role === 'admin') {
+          router.replace(routes.admin);
+        } else {
+          router.replace(user.isRegistrationComplete ? routes.dashboard : routes.completeProfile);
+        }
       },
       onError: (error) => {
         applyApiFieldErrors(error, setError);

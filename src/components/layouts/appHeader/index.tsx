@@ -6,7 +6,7 @@ import { useCurrentUser } from '@/hooks/auth/useCurrentUser';
 import { getErrorMessage } from '@/lib/api/formErrors';
 import { routes } from '@/lib/constants/routes';
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react';
-import { CaretDown, Gear, SignOut } from '@phosphor-icons/react';
+import { CaretDown, Gear, ShieldCheck, SignOut } from '@phosphor-icons/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -21,6 +21,7 @@ const AppHeader = () => {
   const profile = data?.profile;
   const email = data?.user.email ?? '';
   const firstName = profile?.firstName ?? email.split('@')[0] ?? 'Member';
+  const isAdmin = data?.user.role === 'admin';
 
   const handleLogout = () => {
     logout.mutate(undefined, {
@@ -73,6 +74,17 @@ const AppHeader = () => {
                 <p className="truncate text-xs text-gray-500">{email}</p>
               </div>
               <div className="p-1.5">
+                {isAdmin && (
+                  <MenuItem>
+                    <Link
+                      href={routes.admin}
+                      className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-black transition data-[focus]:bg-gray-50"
+                    >
+                      <ShieldCheck size={18} className="text-gray-500" />
+                      Admin dashboard
+                    </Link>
+                  </MenuItem>
+                )}
                 <MenuItem>
                   <Link
                     href={routes.settings}
