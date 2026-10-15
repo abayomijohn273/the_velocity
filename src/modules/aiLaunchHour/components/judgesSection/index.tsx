@@ -5,7 +5,6 @@ import lolaPhoto from '../../../../../public/assets/images/ai-launch-hour/judge-
 import miltonPhoto from '../../../../../public/assets/images/ai-launch-hour/milton-tutu.webp';
 import olubusolaPhoto from '../../../../../public/assets/images/ai-launch-hour/olubusola-ajala.jpg';
 import oluwatobiPhoto from '../../../../../public/assets/images/ai-launch-hour/oluwatobi-oseni.jpg';
-import martinLutherPhoto from '../../../../../public/assets/images/ai-launch-hour/profile-martin-luther-anthony.jpg';
 import michaelPhoto from '../../../../../public/assets/images/ai-launch-hour/profile-michael-ifechukwu-olu.jpg';
 import oluwatimileyinPhoto from '../../../../../public/assets/images/ai-launch-hour/profile-oluwatimileyin-okusi.jpg';
 import styles from '../../styles.module.css';
@@ -65,12 +64,6 @@ const judges: Judge[] = [
     profileUrl: 'https://www.linkedin.com/in/janineanthony/',
   },
   {
-    name: 'Martin-Luther Anthony',
-    photo: martinLutherPhoto,
-    kicker: 'Product strategy',
-    role: 'Product Manager bringing user needs, product priorities, and a clear path to launch into the judging panel.',
-  },
-  {
     name: 'Michael Ifechukwu Olu',
     photo: michaelPhoto,
     kicker: 'Data science',
@@ -99,7 +92,7 @@ const JudgesSection = () => {
           </div>
           <p>
             Technology, product, data, growth, inclusive innovation, human-centered delivery,
-            business strategy, and media innovation—nine perspectives deciding which product
+            business strategy, and media innovation—eight perspectives deciding which product
             deserves to move forward.
           </p>
         </div>
